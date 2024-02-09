@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Pressable, Text, TextInput, View } from 'react-native';
+import { KeyboardAvoidingView, Pressable, Text, TextInput, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { NativeWindStyleSheet } from 'nativewind';
 import GroceryItem from './src/components/GroceryItem';
@@ -22,7 +22,7 @@ export default function App() {
   const handleClearItems = () => setItemsNames([]);
 
   return (
-    <View className="flex-1 w-screen flex-column bg-white">
+    <KeyboardAvoidingView className="flex-1 w-screen flex-column bg-white">
       {/* Button bar */}
       <View className="flex-row w-screen justify-center bg-red-400">
         <Pressable
@@ -50,7 +50,7 @@ export default function App() {
         </View>
       </View>
       <StatusBar style="auto" />
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
