@@ -1,9 +1,13 @@
 import { Text, View } from 'react-native';
 
-export default function GroceryItem() {
+type GroceryItemProps = {
+  name: string;
+};
+
+export default function GroceryItem({ name }: GroceryItemProps) {
   return (
     <View className="">
-      <Text className="p-10">One grocery</Text>
+      <Text className="p-10">{name}</Text>
     </View>
   );
 }
