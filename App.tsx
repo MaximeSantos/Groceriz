@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { KeyboardAvoidingView, Pressable, Text, TextInput, View } from 'react-native';
+import {
+  KeyboardAvoidingView,
+  Pressable,
+  ScrollView,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { NativeWindStyleSheet } from 'nativewind';
 import GroceryItem from './src/components/GroceryItem';
@@ -33,7 +40,7 @@ export default function App() {
         </Pressable>
       </View>
       {/* List of grocery items */}
-      <View className="flex-1 w-screen bg-sky-500 overflow-scroll">
+      <ScrollView className="flex-1 w-screen bg-sky-500">
         <View>
           {itemsNames.map((item, i) => (
             <GroceryItem name={item} key={item + i.toString()} />
@@ -48,7 +55,7 @@ export default function App() {
             onSubmitEditing={handleAddItem}
           />
         </View>
-      </View>
+      </ScrollView>
       <StatusBar style="auto" />
     </KeyboardAvoidingView>
   );
