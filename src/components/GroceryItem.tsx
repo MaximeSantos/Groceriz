@@ -5,9 +5,5 @@ type GroceryItemProps = {
 };
 
 export default function GroceryItem({ name }: GroceryItemProps) {
-  return (
-    <View className="">
-      <Text className="p-10">{name}</Text>
-    </View>
-  );
+  return <Text className="p-10">{name}</Text>;
 }
