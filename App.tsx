@@ -13,49 +13,40 @@ export default function App() {
   const [itemsNames, setItemsNames] = useState<itemsType>(['test1', 'test2']);
   const [inputText, onChangeInputText] = React.useState('');
 
-  const handleClear = () => setItemsNames([]);
-  // onPress, should open textbox that gets focused so the user can type the name of next item
-  const handleAdd = () => {
+  const handleAddItem = () => {
     if (inputText != '') {
       setItemsNames([...itemsNames, inputText]);
       onChangeInputText('');
     }
   };
+  const handleClearItems = () => setItemsNames([]);
 
   return (
     <View className="flex-1 w-screen flex-column bg-white">
       {/* Button bar */}
       <View className="flex-row w-screen justify-center bg-red-400">
         <Pressable
-          onPress={handleClear}
+          onPress={handleClearItems}
           className="bg-green-500 border-black border rounded p-2"
         >
           <Text>Clear</Text>
         </Pressable>
       </View>
       {/* List of grocery items */}
-      <View className="flex-1 w-screen bg-sky-500">
+      <View className="flex-1 w-screen bg-sky-500 overflow-scroll">
         <View>
           {itemsNames.map((item, i) => (
-            <GroceryItem name={item} key={item.toString() + i.toString()} />
+            <GroceryItem name={item} key={item + i.toString()} />
           ))}
         </View>
         <View>
           <TextInput
-            className="flex-1 w-[50%] self-center bg-yellow-500 p-1 m-1 border rounded radius-1"
+            className="w-[50%] h-10 self-center bg-yellow-500 p-1 m-1 border rounded radius-1"
             onChangeText={onChangeInputText}
             value={inputText}
+            onBlur={() => onChangeInputText('')}
+            onSubmitEditing={handleAddItem}
           />
-          {inputText ? (
-            <Pressable
-              onPress={handleAdd}
-              className="bg-green-500 self-center border-black border p-2"
-            >
-              <Text>Add</Text>
-            </Pressable>
-          ) : (
-            <></>
-          )}
         </View>
       </View>
       <StatusBar style="auto" />
