@@ -17,6 +17,7 @@ type itemsType = string[];
 // TODO Make it so the TextInput gets focused again after submitting an item
 
 export default function App() {
+  const statusBarHeight = Constants.statusBarHeight;
   // For now we dont save any data
   // Later on, we will need to save the data from the current list and load it on startup
   // In the end, we will add the ability to save and load multiple lists
@@ -35,9 +36,7 @@ export default function App() {
     <KeyboardAvoidingView className={`flex-1 w-screen flex-column bg-white`}>
       {/* Button bar */}
       <View
-        className={`flex-row w-screen justify-center bg-red-400 ${
-          'py-[' + Constants.statusBarHeight + 'px]'
-        }`}
+        className={`flex-row w-screen justify-center bg-red-400 py-[${statusBarHeight}px]`}
       >
         <Pressable
           onPress={handleClearItems}
