@@ -8,10 +8,13 @@ import {
   View,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import Constants from 'expo-constants';
 import { NativeWindStyleSheet } from 'nativewind';
 import GroceryItem from './src/components/GroceryItem';
 
 type itemsType = string[];
+
+// TODO Make it so the TextInput gets focused again after submitting an item
 
 export default function App() {
   // For now we dont save any data
@@ -29,9 +32,13 @@ export default function App() {
   const handleClearItems = () => setItemsNames([]);
 
   return (
-    <KeyboardAvoidingView className="flex-1 w-screen flex-column bg-white">
+    <KeyboardAvoidingView className={`flex-1 w-screen flex-column bg-white`}>
       {/* Button bar */}
-      <View className="flex-row w-screen justify-center bg-red-400">
+      <View
+        className={`flex-row w-screen justify-center bg-red-400 ${
+          'py-[' + Constants.statusBarHeight + 'px]'
+        }`}
+      >
         <Pressable
           onPress={handleClearItems}
           className="bg-green-500 border-black border rounded p-2"
@@ -56,7 +63,7 @@ export default function App() {
           />
         </View>
       </ScrollView>
-      <StatusBar style="auto" />
+      <StatusBar backgroundColor="transparent" translucent style="dark" />
     </KeyboardAvoidingView>
   );
 }
