@@ -33,20 +33,20 @@ export default function App() {
   const handleClearItems = () => setItemsNames([]);
 
   return (
-    <KeyboardAvoidingView className={`flex-1 w-screen flex-column bg-white`}>
+    <KeyboardAvoidingView className={`flex-column w-screen flex-1 bg-white`}>
       {/* Button bar */}
       <View
-        className={`flex-row w-screen justify-center bg-red-400 py-[${statusBarHeight}px]`}
+        className={`w-screen flex-row justify-center bg-red-400 py-[${statusBarHeight}px]`}
       >
         <Pressable
           onPress={handleClearItems}
-          className="bg-green-500 border-black border rounded p-2"
+          className="rounded border border-black bg-green-500 p-2"
         >
           <Text>Clear</Text>
         </Pressable>
       </View>
       {/* List of grocery items */}
-      <ScrollView className="flex-1 w-screen bg-sky-500">
+      <ScrollView className="w-screen flex-1 bg-sky-500">
         <View>
           {itemsNames.map((item, i) => (
             <GroceryItem name={item} key={item + i.toString()} />
@@ -54,7 +54,7 @@ export default function App() {
         </View>
         <View>
           <TextInput
-            className="w-[50%] h-10 self-center bg-yellow-500 p-1 m-1 border rounded radius-1"
+            className="radius-1 m-1 h-10 w-[50%] self-center rounded border bg-yellow-500 p-1"
             onChangeText={onChangeInputText}
             value={inputText}
             onBlur={() => onChangeInputText('')}
