@@ -12,7 +12,13 @@ import Constants from 'expo-constants';
 import { NativeWindStyleSheet } from 'nativewind';
 import GroceryItem from './src/components/GroceryItem';
 
-type itemsType = string[];
+type ItemsNamesType = string[];
+type ItemsCrossedType = boolean[];
+type ItemType = {
+  name: string;
+  crossed: boolean;
+};
+type ItemsType = ItemType[];
 
 // TODO Make it so the TextInput gets focused again after submitting an item
 // TODO Add a modal to confirm the deletion of all items on pressing the Clear button
@@ -22,29 +28,39 @@ export default function App() {
   // For now we dont save any data
   // Later on, we will need to save the data from the current list and load it on startup
   // In the end, we will add the ability to save and load multiple lists
-  const [itemsNames, setItemsNames] = useState<itemsType>(['test1', 'test2']);
+
+  const [items, setItems] = useState<ItemsType>([
+    { name: 'test1', crossed: false },
+    { name: 'test2', crossed: false },
+  ]);
   const [inputText, onChangeInputText] = React.useState('');
 
+  const handleClearItems = () => setItems([]);
   const handleAddItem = () => {
     if (inputText != '') {
-      setItemsNames([...itemsNames, inputText]);
+      setItems([...items, { name: inputText, crossed: false }]);
       onChangeInputText('');
     }
   };
-  const handleClearItems = () => setItemsNames([]);
-  const handleCrossItem = () => console.log('Item crossed.');
-  const handleDeleteItem = (indexOfItem: number) => {
-    setItemsNames(
-      itemsNames.filter((_, currIndex) => currIndex != indexOfItem)
+  const handleCrossItem = (indexOfItem: number) => {
+    setItems(
+      items.map((item, j) =>
+        indexOfItem == j ? { ...item, crossed: !item.crossed } : item
+      )
     );
   };
+  const handleDeleteItem = (indexOfItem: number) => {
+    setItems(items.filter((_, currIndex) => currIndex != indexOfItem));
+  };
 
-  const listOfItems = itemsNames.map((item, i) => (
+  const listOfItems = items.map((item, i) => (
     <View className="flex-row justify-between" key={item + i.toString()}>
-      <GroceryItem name={item} />
+      <View>
+        <GroceryItem name={item.name} crossed={item.crossed} />
+      </View>
       <View className="mr-2 flex-row gap-2">
         <Pressable
-          onPress={handleCrossItem}
+          onPress={() => handleCrossItem(i)}
           className="h-10 self-center rounded border border-black bg-green-500 p-2"
         >
           <Text>Cross</Text>
