@@ -15,6 +15,7 @@ import GroceryItem from './src/components/GroceryItem';
 type itemsType = string[];
 
 // TODO Make it so the TextInput gets focused again after submitting an item
+// TODO Add a modal to confirm the deletion of all items on pressing the Clear button
 
 export default function App() {
   const statusBarHeight = Constants.statusBarHeight;
@@ -31,6 +32,30 @@ export default function App() {
     }
   };
   const handleClearItems = () => setItemsNames([]);
+  const handleCrossItem = () => console.log('Item crossed.');
+  const handleDeleteItem = (i: number) => {
+    setItemsNames(itemsNames.filter((_, j) => j != i));
+  };
+
+  const listOfItems = itemsNames.map((item, i) => (
+    <View className="flex-row justify-between" key={item + i.toString()}>
+      <GroceryItem name={item} />
+      <View className="mr-2 flex-row gap-2">
+        <Pressable
+          onPress={handleCrossItem}
+          className="h-10 self-center rounded border border-black bg-green-500 p-2"
+        >
+          <Text>Cross</Text>
+        </Pressable>
+        <Pressable
+          onPress={() => handleDeleteItem(i)}
+          className="h-10 self-center rounded border border-black bg-green-500 p-2"
+        >
+          <Text>Delete</Text>
+        </Pressable>
+      </View>
+    </View>
+  ));
 
   return (
     <KeyboardAvoidingView className={`flex-column w-screen flex-1 bg-white`}>
@@ -40,18 +65,14 @@ export default function App() {
       >
         <Pressable
           onPress={handleClearItems}
-          className="rounded border border-black bg-green-500 p-2"
+          className="h-10 rounded border border-black bg-green-500 p-2"
         >
           <Text>Clear</Text>
         </Pressable>
       </View>
       {/* List of grocery items */}
       <ScrollView className="w-screen flex-1 bg-sky-500">
-        <View>
-          {itemsNames.map((item, i) => (
-            <GroceryItem name={item} key={item + i.toString()} />
-          ))}
-        </View>
+        <View>{listOfItems}</View>
         <View>
           <TextInput
             className="radius-1 m-1 h-10 w-[50%] self-center rounded border bg-yellow-500 p-1"
