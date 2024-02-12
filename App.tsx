@@ -33,8 +33,10 @@ export default function App() {
   };
   const handleClearItems = () => setItemsNames([]);
   const handleCrossItem = () => console.log('Item crossed.');
-  const handleDeleteItem = (i: number) => {
-    setItemsNames(itemsNames.filter((_, j) => j != i));
+  const handleDeleteItem = (indexOfItem: number) => {
+    setItemsNames(
+      itemsNames.filter((_, currIndex) => currIndex != indexOfItem)
+    );
   };
 
   const listOfItems = itemsNames.map((item, i) => (
