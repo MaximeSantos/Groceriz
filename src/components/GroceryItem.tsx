@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native';
+import { Text } from 'react-native';
 
 type GroceryItemProps = {
   name: string;
@@ -7,7 +7,9 @@ type GroceryItemProps = {
 
 export default function GroceryItem({ name, crossed }: GroceryItemProps) {
   return (
-    <Text className={`p-10 ${crossed ? 'text-slate-400 line-through' : ''}`}>
+    <Text
+      className={`text-zinc-100 ${crossed ? 'text-zinc-500 line-through' : ''}`}
+    >
       {name}
     </Text>
   );
