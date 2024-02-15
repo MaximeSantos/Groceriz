@@ -8,7 +8,7 @@ type GroceryItemProps = {
 export default function GroceryItem({ name, crossed }: GroceryItemProps) {
   return (
     <Text
-      className={`text-zinc-100 ${crossed ? 'text-zinc-500 line-through' : ''}`}
+      className={`font-inter text-zinc-100 ${crossed ? 'text-zinc-500 line-through' : ''}`}
     >
       {name}
     </Text>

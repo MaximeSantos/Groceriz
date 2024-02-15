@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useFonts } from 'expo-font';
 import {
   KeyboardAvoidingView,
   Pressable,
@@ -23,6 +24,9 @@ type ItemsType = ItemType[];
 // TODO Add ability to rename an item if long press on it
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    'Inter-Light': require('./assets/fonts/Inter-Light.otf'),
+  });
   const statusBarHeight = Constants.statusBarHeight;
   // For now we dont save any data
   // Later on, we will need to save the data from the current list and load it on startup
@@ -65,13 +69,13 @@ export default function App() {
           onPress={() => handleCrossItem(i)}
           className="h-10 self-center rounded bg-zinc-500 p-2 shadow-md"
         >
-          <Text className="text-zinc-100">Cross</Text>
+          <Text className="font-inter text-zinc-100">Cross</Text>
         </Pressable>
         <Pressable
           onPress={() => handleDeleteItem(i)}
           className="h-10 self-center rounded bg-zinc-500 p-2 shadow-md"
         >
-          <Text className="text-zinc-100">Delete</Text>
+          <Text className="font-inter text-zinc-100">Delete</Text>
         </Pressable>
       </View>
     </View>
@@ -87,7 +91,7 @@ export default function App() {
           onPress={handleClearItems}
           className="m-2 h-10 rounded bg-zinc-500 p-2 shadow-md"
         >
-          <Text className="text-zinc-100">Clear</Text>
+          <Text className="font-inter text-zinc-100">Clear</Text>
         </Pressable>
       </View>
       {/* List of grocery items */}
@@ -95,7 +99,7 @@ export default function App() {
         <View>{listOfItems}</View>
         <View>
           <TextInput
-            className="radius-1 m-1 h-10 w-[50%] self-center rounded bg-zinc-500 p-1 text-zinc-100 shadow-md"
+            className="font-inter radius-1 m-1 h-10 w-[50%] self-center rounded bg-zinc-500 p-1 text-zinc-100 shadow-md"
             onChangeText={onChangeInputText}
             value={inputText}
             onBlur={() => onChangeInputText('')}
